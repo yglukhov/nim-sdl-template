@@ -1,7 +1,7 @@
 import strutils
+import sdl2
 
-# Hopefully these will be fixed one day
-import "../patched_temp_stuff/sdl2"
+# Hopefully this will be fixed one day
 import "../patched_temp_stuff/opengl"
 
 
