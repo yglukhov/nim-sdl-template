@@ -26,7 +26,7 @@ let iOSSimulatorDeviceId = "F5D507BE-429C-4A14-861A-73A2335CAE52"
 
 let bundleName = appName & ".app"
 
-let parallelBuild = "--parallelBuild:0"
+let parallelBuild = "--parallelBuild:1"
 let nimVerbose = "--verbosity:0"
 
 let xCodeApp = "/Applications/Xcode.app"
@@ -118,7 +118,8 @@ proc makeAndroidBuildDir(): string =
     buildDir
 
 proc runNim(arguments: varargs[string]) =
-    var args = @[nimExe, "c", "--noMain", parallelBuild, "--stackTrace:off", "--lineTrace:off", nimVerbose]
+    var args = @[nimExe, "c", "--noMain", parallelBuild, "--stackTrace:off", "--lineTrace:off",
+                nimVerbose, "-d:noAutoGLerrorCheck"]
     args.add arguments
     args.add "main"
     direShell args
@@ -132,7 +133,7 @@ task defaultTask, "Build and run":
 
 task "ios-sim", "Build and run in iOS simulator":
     createSDLIncludeLink "nimcache"
-    runNim "--passC:-Inimcache", "--cpu:amd64", "--os:macosx", "-d:ios", "-d:simulator", "-d:SDL_Static",
+    runNim "--passC:-Inimcache", "--cpu:amd64", "--os:macosx", "-d:ios", "-d:iPhone", "-d:simulator", "-d:SDL_Static",
         "--passC:-isysroot", "--passC:" & iOSSimulatorSDK, "--passL:-isysroot", "--passL:" & iOSSimulatorSDK,
         "--passL:-L" & buildSDLForIOS(true), "--passL:-lSDL2",
         "--passC:-mios-simulator-version-min=" & iOSMinVersion, "--passL:-mios-simulator-version-min=" & iOSMinVersion,
@@ -142,7 +143,7 @@ task "ios-sim", "Build and run in iOS simulator":
 
 task "ios", "Build for iOS":
     createSDLIncludeLink "nimcache"
-    runNim "--passC:-Inimcache", "--cpu:arm", "--os:macosx", "-d:ios", "-d:SDL_Static",
+    runNim "--passC:-Inimcache", "--cpu:arm", "--os:macosx", "-d:ios", "-d:iPhone", "-d:SDL_Static",
         "--passC:-isysroot", "--passC:" & iOSSDK, "--passL:-isysroot", "--passL:" & iOSSDK,
         "--passL:-L" & buildSDLForIOS(false), "--passL:-lSDL2",
         "--passC:-mios-version-min=" & iOSMinVersion, "--passL:-mios-version-min=" & iOSMinVersion,
