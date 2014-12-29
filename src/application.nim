@@ -1,11 +1,9 @@
 import strutils
 import sdl2
+import opengl
 import nimx.sdl_window
 import nimx.view
 import nimx.logging
-
-# Hopefully this will be fixed one day
-import "../patched_temp_stuff/opengl"
 
 
 const isMobile = defined(ios) or defined(android)

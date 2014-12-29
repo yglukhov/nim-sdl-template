@@ -3,7 +3,7 @@ import sdl2
 import os
 import logging
 import view
-import patched_temp_stuff.opengl
+import opengl
 import context
 
 type SdlWindow = ref object of Window

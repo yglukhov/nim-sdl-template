@@ -1,5 +1,5 @@
 import view
-import patched_temp_stuff.opengl
+import opengl
 import unsigned
 import logging
 import sdl2

@@ -1,4 +1,4 @@
-import patched_temp_stuff.opengl
+import opengl
 import typetraits
 #import graphics
 
