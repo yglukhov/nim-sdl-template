@@ -66,14 +66,14 @@ proc newGraphicsContext*(): GraphicsContext =
     log "context init"
     when not defined(ios) and not defined(android):
         loadExtensions()
-    log glGetString(GL_VERSION)
+    log glGetString(GL_VERSION)[]
 
 
     let vShader = loadShader(vertexShader, GL_VERTEX_SHADER)
     if vShader == 0:
         log "No vshader!"
 
-    
+
 
     log "create program"
     result.shaderProgram = glCreateProgram()
@@ -111,7 +111,7 @@ proc drawVertexes*(c: GraphicsContext, componentCount: int, points: openarray[Co
 #    glVertexPointer(2, cGL_FLOAT, 0, cast[pointer](points))
 #    glDrawArrays(cast[GLenum](pt), 0, GLsizei(points.len))
 
-proc drawRect*(c: GraphicsContext, r: Rect) =
+proc drawRect*(c: GraphicsContext, r: view.Rect) =
     let points = [r.minX, r.minY,
                 r.maxX, r.minY,
                 r.maxX, r.maxY,

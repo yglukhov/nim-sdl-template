@@ -54,13 +54,13 @@ setEventHandler(eventFilter, nil)
 
 # Main loop
 var
-  evt: TEvent
+  evt = defaultEvent
 
 while runGame:
     discard nextEvent(evt)
     if evt.kind == QuitEvent:
       runGame = false
       break
- 
-Quit()
+
+sdl2.quit()
 
